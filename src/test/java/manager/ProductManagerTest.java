@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductManagerTest {
     ProductRepository repo = new ProductRepository();
     Smartphone testPhone1 = new Smartphone(1, "EG102", 12300, "Samsung");
-    Book testBook1 = new Book(2, "Herlock Sholmes", 1200, "Capcom");
     Smartphone testPhone2 = new Smartphone(1, "EG103", 12300, "Apple");
-    Book testBook2 = new Book(2, "Compra", 1200, "Konami");
     Smartphone testPhone3 = new Smartphone(1, "EG103", 12300, "Samsung");
+    Book testBook1 = new Book(2, "Herlock Sholmes", 1200, "Capcom");
+    Book testBook2 = new Book(2, "Compra", 1200, "Konami");
 
     @BeforeEach
     public void setUp() {
@@ -59,6 +59,14 @@ class ProductManagerTest {
         String text = "EG102";
         Product[] actual = ProductManager.searchBy(text);
         Product[] expected = new Product[]{testPhone1};
+        assertArrayEquals(actual, expected);
+    }
+
+    @Test
+    void searchByNothingFound() {
+        String text = "123";
+        Product[] actual = ProductManager.searchBy(text);
+        Product[] expected = new Product[0];
         assertArrayEquals(actual, expected);
     }
 
