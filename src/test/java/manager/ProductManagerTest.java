@@ -16,11 +16,15 @@ class ProductManagerTest {
     Book testBook1 = new Book(2, "Herlock Sholmes", 1200, "Capcom");
     Smartphone testPhone2 = new Smartphone(1, "EG103", 12300, "Apple");
     Book testBook2 = new Book(2, "Compra", 1200, "Konami");
+    Smartphone testPhone3 = new Smartphone(1, "EG103", 12300, "Samsung");
 
     @BeforeEach
     public void setUp() {
         repo.save(testPhone1);
         repo.save(testBook1);
+        repo.save(testPhone2);
+        repo.save(testBook2);
+        repo.save(testPhone3);
     }
 
     @AfterEach
@@ -47,7 +51,7 @@ class ProductManagerTest {
     void searchByBrandTest() {
         String text = "Samsung";
         Product[] actual = ProductManager.searchBy(text);
-        Product[] expected = new Product[]{testPhone1};
+        Product[] expected = new Product[]{testPhone1, testPhone3};
         assertArrayEquals(actual, expected);
     }
     @Test
